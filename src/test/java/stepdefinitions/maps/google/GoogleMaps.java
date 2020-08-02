@@ -6,6 +6,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
+import org.codehaus.plexus.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -33,8 +34,8 @@ public class GoogleMaps {
     }
 
     @When("^I search for (.*?)$")
-    public void i_search_for_city(String city) throws Throwable {
-        driver.findElement(By.id("searchboxinput")).sendKeys(city + Keys.ENTER);
+    public void i_search_for_pattern(String pattern) throws Throwable {
+        driver.findElement(By.id("searchboxinput")).sendKeys(pattern + Keys.ENTER);
 
     }
 
@@ -42,11 +43,12 @@ public class GoogleMaps {
     public void i_should_see_city_on_the_map(String city) throws Throwable {
         driver.findElement(By.xpath("//h1/span[contains(text(),'"+city+"')]"));
 
-        Thread.sleep(4000);
     }
 
-    @Then("^I should see pizza restaurant the map$")
-    public void iShouldSeePizzaRestaurantTheMap() throws Throwable {
+    @Then("^I should see (.*?) restaurants$")
+    public void iShouldSeePatternRestaurantTheMap(String pattern) throws Throwable {
+        driver.findElement(By.xpath("//span[@class='section-result-details'][contains(text(),'"+pattern+"')]"));
+        System.out.println(pattern);
         Thread.sleep(4000);
     }
 }
