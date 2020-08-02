@@ -7,6 +7,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
@@ -33,12 +34,24 @@ public class GoogleMaps {
 
     @When("^I search for Berlin Germany$")
     public void i_search_for_Berlin_Germany() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        driver.findElement(By.id("searchboxinput")).sendKeys("Berlin, Germany"+ Keys.ENTER);
+
     }
 
     @Then("^I should see Berlin on the map$")
     public void i_should_see_Berlin_on_the_map() throws Throwable {
+        driver.findElement(By.xpath("//h1/span[contains(text(),'Berlin')]"));
+        Thread.sleep(4000);
+    }
+
+    @When("^I search for pizza in Berlin$")
+    public void iSearchForPizzaInBerlin() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^I should see pizza restaurant on the map$")
+    public void iShouldSeePizzaRestaurantOnTheMap() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
